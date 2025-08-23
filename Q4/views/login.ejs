@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+  <form method="POST" class="bg-white p-8 rounded shadow-md w-96">
+    <h2 class="text-xl mb-4 font-bold">Admin Login</h2>
+    <% if (error) { %>
+      <p class="text-red-500"><%= error %></p>
+    <% } %>
+    <input name="username" placeholder="Username" class="w-full border p-2 mb-4">
+    <input name="password" type="password" placeholder="Password" class="w-full border p-2 mb-4">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+   <br> <small>username: admin Pasowrd: admin123</small> 
+  </form>
+</body>
+</html>

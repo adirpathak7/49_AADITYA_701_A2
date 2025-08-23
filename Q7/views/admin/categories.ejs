@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Categories</title>
+</head>
+<body>
+  <h1>Manage Categories</h1>
+  <form method="POST" action="/admin/categories">
+    <input type="text" name="name" placeholder="Category Name" required>
+    <select name="parent">
+      <option value="">--No Parent--</option>
+      <% categories.forEach(c => { %>
+        <option value="<%= c._id %>"><%= c.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+
+  <h2>Category List</h2>
+  <ul>
+    <% categories.forEach(c => { %>
+      <li>
+        <%= c.name %> 
+        <% if(c.parent) { %> (Parent: <%= c.parent.name %>) <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

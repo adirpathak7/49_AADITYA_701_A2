@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="p-10 bg-gray-50">
+  <h1 class="text-2xl mb-4">Admin Dashboard</h1>
+  <a href="/employee/add" class="bg-green-500 text-white px-4 py-2 rounded">Add Employee</a>
+  <a href="/logout" class="ml-4 text-red-500">Logout</a>
+
+  <table class="mt-6 w-full table-auto border-collapse border border-gray-300">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="border px-4 py-2">EmpID</th>
+        <th class="border px-4 py-2">Name</th>
+        <th class="border px-4 py-2">Email</th>
+        <th class="border px-4 py-2">Salary</th>
+        <th class="border px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% employees.forEach(emp => { %>
+        <tr>
+          <td class="border px-4 py-2"><%= emp.empid %></td>
+          <td class="border px-4 py-2"><%= emp.name %></td>
+          <td class="border px-4 py-2"><%= emp.email %></td>
+          <td class="border px-4 py-2"><%= emp.salary %></td>
+          <td class="border px-4 py-2 space-x-4">
+            <a href="/employee/edit/<%= emp._id %>" class="text-blue-500">Edit</a>
+            <a href="/employee/delete/<%= emp._id %>" class="text-red-500">Delete</a>
+           </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>

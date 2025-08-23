@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Add Employee</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="p-10 bg-gray-50">
+  <h1 class="text-xl mb-4">Add New Employee</h1>
+  <form method="POST" action="/employee/add" class="bg-white p-6 rounded shadow-md w-96">
+    <input name="name" placeholder="Name" class="w-full border p-2 mb-4" required>
+    <input name="email" placeholder="Email" class="w-full border p-2 mb-4" required>
+    <input name="salary" placeholder="Monthly Salary" class="w-full border p-2 mb-4" required>
+    <input name="daysWorked" placeholder="Days Worked" class="w-full border p-2 mb-4" required>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products</title>
+</head>
+<body>
+  <h1>Manage Products</h1>
+  <form method="POST" action="/admin/products">
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="number" step="0.01" name="price" placeholder="Price" required>
+    <textarea name="description" placeholder="Description"></textarea>
+    <select name="category" required>
+      <% categories.forEach(cat => { %>
+        <option value="<%= cat._id %>"><%= cat.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+
+  <h2>Product List</h2>
+  <table border="1" cellpadding="5">
+    <tr>
+      <th>Name</th><th>Price</th><th>Category</th><th>Description</th>
+    </tr>
+    <% products.forEach(p => { %>
+      <tr>
+        <td><%= p.name %></td>
+        <td>₹<%= p.price %></td>
+        <td><%= p.category.name %></td>
+        <td><%= p.description %></td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
