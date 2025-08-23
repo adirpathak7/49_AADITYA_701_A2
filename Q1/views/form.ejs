@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration</title>
+</head>
+<body>
+  <h2>User Registration</h2>
+
+  <% if (errors.length > 0) { %>
+    <ul style="color:red;">
+      <% errors.forEach(err => { %>
+        <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form action="/register" method="post" enctype="multipart/form-data">
+    Username: <input type="text" name="username" value="<%= old.username || '' %>"><br><br>
+    Password: <input type="password" name="password"><br><br>
+    Confirm Password: <input type="password" name="confirmPassword"><br><br>
+    Email: <input type="text" name="email" value="<%= old.email || '' %>"><br><br>
+
+    Gender: 
+    <input type="radio" name="gender" value="Male" <%= old.gender==="Male"?"checked":"" %>> Male
+    <input type="radio" name="gender" value="Female" <%= old.gender==="Female"?"checked":"" %>> Female <br><br>
+
+    Hobbies:
+    <input type="checkbox" name="hobbies" value="Reading" <%= old.hobbies && old.hobbies.includes("Reading")?"checked":"" %>> Reading
+    <input type="checkbox" name="hobbies" value="Sports" <%= old.hobbies && old.hobbies.includes("Sports")?"checked":"" %>> Sports
+    <input type="checkbox" name="hobbies" value="Music" <%= old.hobbies && old.hobbies.includes("Music")?"checked":"" %>> Music
+    <br><br>
+
+    Upload Profile Pic: <input type="file" name="profilePic"><br><br>
+    Upload Other Pics: <input type="file" name="otherPics" multiple><br><br>
+
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>
