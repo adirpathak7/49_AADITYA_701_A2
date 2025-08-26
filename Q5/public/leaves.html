@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Leaves</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>body{font-family:Arial;max-width:700px;margin:30px auto;}label,input,textarea{display:block;width:100%;margin:6px 0}</style>
+</head>
+<body>
+  <h2>Apply for Leave</h2>
+
+  <div id="feedback" style="color:green"></div>
+
+  <form id="leaveForm">
+    <label>Date</label>
+    <input type="date" id="date" required />
+    <label>Reason</label>
+    <textarea id="reason" rows="3" required></textarea>
+    <button type="submit">Submit Leave</button>
+  </form>
+
+  <h3>Your Leaves</h3>
+  <table border="1" id="leavesTable" width="100%" style="border-collapse:collapse">
+    <thead><tr><th>Date</th><th>Reason</th><th>Granted</th><th>Applied At</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <p><a href="/profile.html">Profile</a> | <a href="#" id="logout">Logout</a></p>
+
+  <script>
+    const token = localStorage.getItem('token');
+    if (!token) window.location.href = '/';
+
+    function loadLeaves(){
+      $.ajax({
+        url: '/api/leaves',
+        method: 'GET',
+        headers: { Authorization: 'Bearer ' + token },
+        success(res){
+          const tbody = $('#leavesTable tbody').empty();
+          if (!res.length) tbody.append('<tr><td colspan="4">No leaves</td></tr>');
+          res.forEach(l => {
+            tbody.append(`<tr>
+              <td>${new Date(l.date).toLocaleDateString()}</td>
+              <td>${l.reason}</td>
+              <td>${l.granted ? 'Yes' : 'No'}</td>
+              <td>${new Date(l.createdAt).toLocaleString()}</td>
+            </tr>`);
+          });
+        },
+        error(){
+          // token invalid -> go to login
+          localStorage.removeItem('token'); localStorage.removeItem('profile'); window.location.href = '/';
+        }
+      });
+    }
+
+    $('#leaveForm').on('submit', function(e){
+      e.preventDefault();
+      $('#feedback').text('');
+      const date = $('#date').val();
+      const reason = $('#reason').val().trim();
+      if (!date || !reason) { $('#feedback').css('color','red').text('Fill both fields'); return; }
+
+      $.ajax({
+        url: '/api/leaves',
+        method: 'POST',
+        contentType: 'application/json',
+        headers: { Authorization: 'Bearer ' + token },
+        data: JSON.stringify({ date, reason }),
+        success(res){
+          $('#feedback').css('color','green').text('Leave applied');
+          $('#reason').val(''); $('#date').val('');
+          loadLeaves();
+        },
+        error(xhr){
+          $('#feedback').css('color','red').text(xhr.responseJSON?.message || 'Error');
+        }
+      });
+    });
+
+    $('#logout').on('click', function(e){ e.preventDefault(); localStorage.removeItem('token'); localStorage.removeItem('profile'); window.location.href = '/'; });
+
+    loadLeaves();
+  </script>
+</body>
+</html>

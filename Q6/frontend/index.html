@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Holidays</title>
+</head>
+<body>
+    <h1>Upcoming Public Holidays</h1>
+    <label for="country">Select Country</label>
+    <select id="country">
+        <option value="US">United State</option>
+        <option value="DE">Germany</option>
+        <option value="IN">India</option>
+        <option value="FR">France</option>
+        <option value="JP">Japan</option>
+    </select>
+
+    <ul id="holidays">Loadng...</ul>
+
+    <script>
+
+        const countrySelector = document.getElementById('country');
+        const list = document.getElementById('holidays');
+
+        async function loadHolidays(country) {
+            try {
+                const res = await fetch(`/api/holidays?country=${country}`);
+                const holidays = await res.json();
+
+                list.innerHTML = holidays.map(h => `<li>${h.date} - ${h.localName}</li>`).join('');
+            } catch (err) {
+                list.innerHTML = '<li>Failed to load holidays.</li>';
+                console.error(err);
+            }
+        }
+
+            countrySelector.addEventListener('change', () => {
+            loadHolidays(countrySelector.value);
+        });
+
+        loadHolidays(countrySelector.value);
+    </script>
+</body>
+</html>

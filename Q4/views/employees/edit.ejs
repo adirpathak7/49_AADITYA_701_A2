@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Employee</title>
+</head>
+<body>
+  <h2>Edit Employee</h2>
+  <form method="POST" action="/employees/edit/<%= emp._id %>">
+    <label>Name:</label><br/>
+    <input type="text" name="name" value="<%= emp.name %>" required><br/><br/>
+
+    <label>Email:</label><br/>
+    <input type="email" name="email" value="<%= emp.email %>" required><br/><br/>
+
+    <label>Basic Salary:</label><br/>
+    <input type="number" name="basicSalary" value="<%= emp.basicSalary %>" required><br/><br/>
+
+    <label>HRA:</label><br/>
+    <input type="number" name="hra" value="<%= emp.hra %>" required><br/><br/>
+
+    <label>DA:</label><br/>
+    <input type="number" name="da" value="<%= emp.da %>" required><br/><br/>
+
+    <button type="submit">Update</button>
+  </form>
+  <br/>
+  <a href="/employees">Back to List</a>
+</body>
+</html>

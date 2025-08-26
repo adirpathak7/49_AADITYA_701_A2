@@ -1,0 +1,7 @@
+
+Username: a
+Email: a@gmail.com
+Gender: Male
+Hobbies: Reading, Sports, Music
+Profile Pic: 1756181913181-Screenshot (1).png
+Other Pics: 

@@ -1,0 +1,8 @@
+
+      Username: adi
+      Email: adityarpathak7@gmail.com
+      Gender: Male
+      Hobbies: Reading, Sports
+      Profile Pic: 1756181376581-SRK.jpg
+      Other Pics: 1756181376583-Deepika.jpg
+    

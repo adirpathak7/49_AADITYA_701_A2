@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Profile</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>body{font-family:Arial;max-width:700px;margin:30px auto;}</style>
+</head>
+<body>
+  <h2>Employee Profile</h2>
+  <div id="profile">
+    Loading...
+  </div>
+  <p>
+    <a href="/leaves.html">Apply / View Leaves</a> |
+    <a href="#" id="logout">Logout</a>
+  </p>
+
+  <script>
+    function redirectToLogin(){ localStorage.removeItem('token'); localStorage.removeItem('profile'); window.location.href = '/'; }
+
+    const token = localStorage.getItem('token');
+    if (!token) { window.location.href = '/'; }
+
+    $.ajax({
+      url: '/api/employee/profile',
+      method: 'GET',
+      headers: { Authorization: 'Bearer ' + token },
+      success(emp) {
+        $('#profile').html(
+          `<strong>Name:</strong> ${emp.name} <br/>
+           <strong>Email:</strong> ${emp.email} <br/>
+           <strong>Employee ID:</strong> ${emp.empId}`
+        );
+      },
+      error() {
+        redirectToLogin();
+      }
+    });
+
+    $('#logout').on('click', function(e){
+      e.preventDefault();
+      redirectToLogin();
+    });
+  </script>
+</body>
+</html>

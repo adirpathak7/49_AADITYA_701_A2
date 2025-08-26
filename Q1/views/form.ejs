@@ -1,39 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Registration</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h2>User Registration</h2>
 
-  <% if (errors.length > 0) { %>
-    <ul style="color:red;">
-      <% errors.forEach(err => { %>
-        <li><%= err.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center py-10 px-4">
+  <div class="w-full max-w-lg bg-white p-8 rounded shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">User Registration</h2>
 
-  <form action="/register" method="post" enctype="multipart/form-data">
-    Username: <input type="text" name="username" value="<%= old.username || '' %>"><br><br>
-    Password: <input type="password" name="password"><br><br>
-    Confirm Password: <input type="password" name="confirmPassword"><br><br>
-    Email: <input type="text" name="email" value="<%= old.email || '' %>"><br><br>
+    <% if (errors.length> 0) { %>
+      <div class="mb-4 bg-red-100 text-red-700 border border-red-400 rounded px-4 py-3">
+        <ul class="list-disc ml-5">
+          <% errors.forEach(err=> { %>
+            <li>
+              <%= err.msg %>
+            </li>
+            <% }) %>
+        </ul>
+      </div>
+      <% } %>
 
-    Gender: 
-    <input type="radio" name="gender" value="Male" <%= old.gender==="Male"?"checked":"" %>> Male
-    <input type="radio" name="gender" value="Female" <%= old.gender==="Female"?"checked":"" %>> Female <br><br>
+        <form action="/register" method="post" enctype="multipart/form-data" class="space-y-4">
+          <div>
+            <label class="block font-medium">Username</label>
+            <input type="text" name="username" value="<%= old.username || '' %>"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
 
-    Hobbies:
-    <input type="checkbox" name="hobbies" value="Reading" <%= old.hobbies && old.hobbies.includes("Reading")?"checked":"" %>> Reading
-    <input type="checkbox" name="hobbies" value="Sports" <%= old.hobbies && old.hobbies.includes("Sports")?"checked":"" %>> Sports
-    <input type="checkbox" name="hobbies" value="Music" <%= old.hobbies && old.hobbies.includes("Music")?"checked":"" %>> Music
-    <br><br>
+          <div>
+            <label class="block font-medium">Password</label>
+            <input type="password" name="password"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
 
-    Upload Profile Pic: <input type="file" name="profilePic"><br><br>
-    Upload Other Pics: <input type="file" name="otherPics" multiple><br><br>
+          <div>
+            <label class="block font-medium">Confirm Password</label>
+            <input type="password" name="confirmPassword"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
 
-    <button type="submit">Register</button>
-  </form>
+          <div>
+            <label class="block font-medium">Email</label>
+            <input type="text" name="email" value="<%= old.email || '' %>"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+
+          <div>
+            <label class="block font-medium mb-1">Gender</label>
+            <div class="flex items-center gap-6">
+              <label class="flex items-center">
+                <input type="radio" name="gender" value="Male" <%=old.gender==="Male" ?"checked":"" %> class="mr-2" />
+                Male
+              </label>
+              <label class="flex items-center">
+                <input type="radio" name="gender" value="Female" <%=old.gender==="Female" ?"checked":"" %> class="mr-2"
+                />
+                Female
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-medium mb-1">Hobbies</label>
+            <div class="flex flex-wrap gap-4">
+              <label class="flex items-center">
+                <input type="checkbox" name="hobbies" value="Reading" <%=old.hobbies &&
+                  old.hobbies.includes("Reading")?"checked":"" %> class="mr-2" />
+                Reading
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="hobbies" value="Sports" <%=old.hobbies &&
+                  old.hobbies.includes("Sports")?"checked":"" %> class="mr-2" />
+                Sports
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" name="hobbies" value="Music" <%=old.hobbies &&
+                  old.hobbies.includes("Music")?"checked":"" %> class="mr-2" />
+                Music
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-medium">Upload Profile Pic</label>
+            <input type="file" name="profilePic" class="block mt-1 text-sm text-gray-600" />
+          </div>
+
+          <div>
+            <label class="block font-medium">Upload Other Pics</label>
+            <input type="file" name="otherPics" multiple class="block mt-1 text-sm text-gray-600" />
+          </div>
+
+          <div class="pt-4">
+            <button type="submit"
+              class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Register</button>
+          </div>
+        </form>
+  </div>
 </body>
+
 </html>

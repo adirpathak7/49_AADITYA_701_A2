@@ -1,69 +1,70 @@
-const express = require("express");
-const session = require("express-session");
-const FileStore = require("session-file-store")(session);
-const path = require("path");
+const express = require('express');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+const bodyParser = require('body-parser');
 
 const app = express();
+const PORT = 3000;
 
-// View engine
-app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended : true}));
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-
-// Session config
 app.use(
-  session({
-    store: new FileStore({ path: "./sessions" }),
-    secret: "secret-key-123",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }, // 1 min for testing
-  })
+    session({
+        store : new FileStore({ path : './session'}),
+        secret : 'your-secret-key',
+        resave : false,
+        saveUninitialized : false,
+        cookie : {maxAge : 3600000},
+    })
 );
 
-// Dummy credentials
 const USER = {
-  username: "akash",
-  password: "12345",
+    username : 'admin',
+    password : 'admin123',
 };
 
-// Routes
-
-app.get("/", (req, res) => {
-  res.redirect("/login");
+app.get('/',(req,res) => {
+    res.send(`
+        <h2>Login Page</h2>
+        <form method="POST" action="/login">
+            <input name="username" type="text" placeholder="Username" required/></br>
+            <input name="password" type="password" placeholder="Password" required/></br>
+            <button type="submit">Login</button>
+        </form>    
+    `);
 });
 
-app.get("/login", (req, res) => {
-  res.render("login", { error: null });
+app.post('/login',(req,res) => {
+    const {username,password} = req.body;
+
+    if (username === USER.username && password === USER.password) {
+        req.session.user = username;
+        return res.redirect('/dashboard');
+    }
+    res.send('Invalid Credentials. <a href="/">Try Again.</a>');
 });
 
-app.post("/login", (req, res) => {
-  const { username, password } = req.body;
+function authMiddelware(req,res,next) {
+    if (req.session.user) {
+        return next();
+    }
+    res.redirect('/');
+}
 
-  if (username === USER.username && password === USER.password) {
-    req.session.user = username;
-    return res.redirect("/dashboard");
-  } else {
-    return res.render("login", { error: "Invalid username or password" });
-  }
+app.get('/dashboard', authMiddelware, (req, res) => {
+  res.send(`
+    <h2>Welcome, ${req.session.user}</h2>
+    <h4>This is your Dashboard!!!</h4>
+    <a href="/logout">Logout</a>
+  `);
 });
 
-app.get("/dashboard", (req, res) => {
-  if (!req.session.user) {
-    return res.redirect("/login");
-  }
-
-  res.render("dashboard", { username: req.session.user });
+app.get('/logout',(req,res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
 });
 
-app.get("/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.redirect("/login");
-  });
-});
-
-app.listen(3000, () => {
-  console.log("Server started on http://localhost:3000");
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

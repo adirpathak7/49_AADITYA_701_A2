@@ -1,0 +1,79 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+</head>
+<body>
+    <h2>Employee List</h2>
+    <a href="/employees/create">Add Employee</a> | <a href="/admin/logout">Logout</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% employees.forEach(e => { %>
+            <tr>
+                <td><%= e.empId %></td>
+                <td><%= e.name %></td>
+                <td><%= e.email %></td>
+                <td><%= e.grossSalary %></td>
+                <td>
+                    <a href="/employees/edit/<%= e._id %>">Edit</a>
+                    <a href="/employees/delete/<%= e._id %>" onclick="return confirm('Delete?')">Delete</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee List</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Employee List</h2>
+    <div class="top-links">
+      <a href="/employees/create">+ Add Employee</a>
+      <a href="/logout">Logout</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Salary</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% employees.forEach(emp => { %>
+          <tr>
+            <td><%= emp.empId %></td>
+            <td><%= emp.name %></td>
+            <td><%= emp.email %></td>
+            <td>₹<%= emp.grossSalary %></td>
+            <td class="actions">
+              <a href="/employees/edit/<%= emp._id %>" class="edit">Edit</a>
+              <a href="/employees/delete/<%= emp._id %>" class="delete">Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

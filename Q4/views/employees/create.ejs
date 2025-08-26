@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Employee</title>
+</head>
+<body>
+  <h2>Create Employee</h2>
+  <form method="POST" action="/employees/create">
+    <label>Name:</label><br/>
+    <input type="text" name="name" required><br/><br/>
+
+    <label>Email:</label><br/>
+    <input type="email" name="email" required><br/><br/>
+
+    <label>Basic Salary:</label><br/>
+    <input type="number" name="basicSalary" required><br/><br/>
+
+    <label>HRA:</label><br/>
+    <input type="number" name="hra" required><br/><br/>
+
+    <label>DA:</label><br/>
+    <input type="number" name="da" required><br/><br/>
+
+    <button type="submit">Create</button>
+  </form>
+  <br/>
+  <a href="/employees">Back to List</a>
+</body>
+</html>
