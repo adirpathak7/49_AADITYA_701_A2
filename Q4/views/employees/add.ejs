@@ -3,50 +3,49 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Edit Employee</title>
+    <title>Add New Employee</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100 min-h-screen p-6">
     <div class="max-w-xl mx-auto bg-white p-8 rounded shadow">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Employee: <%= emp.name %>
-        </h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Add New Employee</h2>
 
-        <form action="/employees/edit/<%= emp._id %>" method="POST" class="space-y-4">
+        <form action="/employees/add" method="POST" class="space-y-4">
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Name:</label>
-                <input type="text" name="name" value="<%= emp.name %>" required
+                <input type="text" name="name" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Email:</label>
-                <input type="email" name="email" value="<%= emp.email %>" required
+                <input type="email" name="email" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Position:</label>
-                <input type="text" name="position" value="<%= emp.position %>" required
+                <input type="text" name="position" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Base Salary:</label>
-                <input type="number" name="baseSalary" value="<%= emp.baseSalary %>" required
+                <input type="number" name="baseSalary" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
             <div>
                 <label class="block text-gray-700 font-medium mb-1">Bonus:</label>
-                <input type="number" name="bonus" value="<%= emp.bonus %>" required
+                <input type="number" name="bonus" required
                     class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
-            <button type="submit"
-                class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Update
-                Employee</button>
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                Add Employee
+            </button>
         </form>
 
         <div class="mt-6">

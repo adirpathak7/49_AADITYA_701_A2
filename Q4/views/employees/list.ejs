@@ -1,79 +1,59 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee List</title>
+    <title>Employees</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Employee List</h2>
-    <a href="/employees/create">Add Employee</a> | <a href="/admin/logout">Logout</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Salary</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% employees.forEach(e => { %>
-            <tr>
-                <td><%= e.empId %></td>
-                <td><%= e.name %></td>
-                <td><%= e.email %></td>
-                <td><%= e.grossSalary %></td>
-                <td>
-                    <a href="/employees/edit/<%= e._id %>">Edit</a>
-                    <a href="/employees/delete/<%= e._id %>" onclick="return confirm('Delete?')">Delete</a>
-                </td>
-            </tr>
-            <% }) %>
-        </tbody>
-</body>
-</html> -->
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Employee List</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <div class="container">
-    <h2>Employee List</h2>
-    <div class="top-links">
-      <a href="/employees/create">+ Add Employee</a>
-      <a href="/logout">Logout</a>
+<body class="bg-gray-100 min-h-screen p-6">
+    <div class="max-w-6xl mx-auto bg-white p-8 rounded shadow">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Employees</h2>
+            <a href="/employees/add" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Add
+                New</a>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-gray-200 rounded">
+                <thead class="bg-gray-200 text-gray-700">
+                    <tr>
+                        <th class="py-2 px-4 text-left border-b">ID</th>
+                        <th class="py-2 px-4 text-left border-b">Name</th>
+                        <th class="py-2 px-4 text-left border-b">Email</th>
+                        <th class="py-2 px-4 text-left border-b">Salary</th>
+                        <th class="py-2 px-4 text-left border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% employees.forEach(emp=> { %>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4 border-b">
+                                <%= emp.empId %>
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                <%= emp.name %>
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                <%= emp.email %>
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                <%= emp.totalSalary %>
+                            </td>
+                            <td class="py-2 px-4 border-b">
+                                <a href="/employees/edit/<%= emp._id %>"
+                                    class="text-blue-600 hover:underline mr-2">Edit</a>
+                                <a href="/employees/delete/<%= emp._id %>"
+                                    class="text-red-600 hover:underline">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Salary</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% employees.forEach(emp => { %>
-          <tr>
-            <td><%= emp.empId %></td>
-            <td><%= emp.name %></td>
-            <td><%= emp.email %></td>
-            <td>₹<%= emp.grossSalary %></td>
-            <td class="actions">
-              <a href="/employees/edit/<%= emp._id %>" class="edit">Edit</a>
-              <a href="/employees/delete/<%= emp._id %>" class="delete">Delete</a>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
 </body>
+
 </html>
