@@ -1,1 +1,10 @@
-{"cookie":{"originalMaxAge":3600000,"expires":"2025-08-26T05:39:29.864Z","httpOnly":true,"path":"/"},"user":"adi","__lastAccess":1756183169865}
+{
+    "cookie": {
+        "originalMaxAge": 3600000,
+        "expires": "2025-08-26T05:39:29.864Z",
+        "httpOnly": true,
+        "path": "/"
+    },
+    "user": "adi",
+    "__lastAccess": 1756183169865
+}

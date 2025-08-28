@@ -1,51 +1,29 @@
+<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body{font-family: Arial; max-width:420px;margin:50px auto;}
-        label,input{display:block;width:100%;margin-bottom:10px;}
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Employee Login</h2>
-    <div id="msg" style="color:red"></div>
-    <form id="loginForm">
-        <label>Email</label>
-        <input type="email" id="email" required />
-        <label>Password</label>
-        <input type="password" id="password" required />
-        <button type="submit">Login</button>
-    </form>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $('#loginForm').on('submit', function(e){
-            e.preventDefault();
-            $('#msg').text('');
-            const email = $('#email').val();
-            const password = $('#password').val();
-            $.ajax({
-                url: '/api/auth/login',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ email, password }),
-                success(res) {
-                    localStorage.setItem('token', res.token);
-                    localStorage.setItem('profile', JSON.stringify(res.profile));
-                    window.location.href = '/profile.html';
-                },
-                error(xhr) {
-                    $('#msg').text(xhr.responseJSON?.message || 'Login failed');
-                }
-            });
-        });
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
+        <h2 class="text-2xl font-bold mb-6 text-center">Employee Login</h2>
+        <form id="loginForm" class="space-y-4">
+            <input id="email" type="email" placeholder="Email" class="w-full px-4 py-2 border rounded" required />
+            <input id="password" type="password" placeholder="Password" class="w-full px-4 py-2 border rounded"
+                required />
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+                Login
+            </button>
+            <p id="loginError" class="text-red-500 text-sm text-center hidden"></p>
+        </form>
+    </div>
 
-        if (localStorage.getItem('token')) {
-            window.location.href = '/profile.html';
-        }
-    </script>
+    <script src="./js/index.js"></script>
 </body>
+
 </html>

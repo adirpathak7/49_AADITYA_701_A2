@@ -1,47 +1,30 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <title>Profile</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>body{font-family:Arial;max-width:700px;margin:30px auto;}</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Profile</title>
+    <script src="js/index.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-  <h2>Employee Profile</h2>
-  <div id="profile">
-    Loading...
-  </div>
-  <p>
-    <a href="/leaves.html">Apply / View Leaves</a> |
-    <a href="#" id="logout">Logout</a>
-  </p>
 
-  <script>
-    function redirectToLogin(){ localStorage.removeItem('token'); localStorage.removeItem('profile'); window.location.href = '/'; }
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Employee Profile</h2>
 
-    const token = localStorage.getItem('token');
-    if (!token) { window.location.href = '/'; }
+        <div id="profileData" class="space-y-3 text-gray-700">
+            <!-- Profile data will be injected here -->
+        </div>
 
-    $.ajax({
-      url: '/api/employee/profile',
-      method: 'GET',
-      headers: { Authorization: 'Bearer ' + token },
-      success(emp) {
-        $('#profile').html(
-          `<strong>Name:</strong> ${emp.name} <br/>
-           <strong>Email:</strong> ${emp.email} <br/>
-           <strong>Employee ID:</strong> ${emp.empId}`
-        );
-      },
-      error() {
-        redirectToLogin();
-      }
-    });
-
-    $('#logout').on('click', function(e){
-      e.preventDefault();
-      redirectToLogin();
-    });
-  </script>
+        <div class="mt-6 flex justify-between items-center">
+            <a href="leave.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Apply for
+                Leave</a>
+            <button onclick="logout()"
+                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Logout</button>
+        </div>
+    </div>
 </body>
+
 </html>
