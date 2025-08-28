@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Category</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-8 bg-gray-50">
+    <h1 class="text-3xl font-bold mb-6">Add New Category</h1>
+
+    <form action="/admin/categories/add" method="POST" class="max-w-md bg-white p-6 rounded shadow">
+        <div class="mb-4">
+            <label for="name" class="block mb-1 font-semibold">Category Name</label>
+            <input type="text" id="name" name="name" required class="w-full border px-3 py-2 rounded" />
+        </div>
+
+        <div class="mb-4">
+            <!-- <label for="parent" class="block mb-1 font-semibold">Parent Category (optional)</label> -->
+            <!-- <select id="parent" name="parent" class="w-full border px-3 py-2 rounded">
+                <option value="" selected>No parent (Top level category)</option>
+                <% categories.forEach(cat=> { %>
+                    <option value="<%= cat._id %>">
+                        <%= cat.name %>
+                    </option>
+                    <% }); %>
+            </select> -->
+        </div>
+
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add Category</button>
+    </form>
+
+    <p class="mt-6"><a href="/admin/categories" class="text-blue-600 underline">Back to category list</a></p>
+</body>
+
+</html>
